@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Survey Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .survey-container {
+            width: 100%;
+            max-width: 100;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container" id="survey-container"></div>
+<script>
+fetch('/survey')
+  .then(res => res.text())
+  .then(html => {
+      document.getElementById('survey-container').innerHTML = html;
+  })
+  .catch(err => console.error('Error loading survey:', err));
+</script>
+
+</body>
+</html>
