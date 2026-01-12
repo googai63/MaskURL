@@ -20,7 +20,6 @@ app.get("/survey", async (req, res) => {
     const html = await response.text();
     const $ = cheerio.load(html);
 
-   
     const customImg =
       "https://datanexaresearch.com/wp-content/uploads/2025/12/Transparent-1-120x80.png";
     $("img").each((i, el) => {
@@ -58,13 +57,10 @@ app.get("/survey", async (req, res) => {
 
     const faviconUrl =
       "https://datanexaresearch.com/wp-content/uploads/2025/12/Transparent-1-120x80.png";
-    if ($("link[rel='icon']").length) {
-      $("link[rel='icon']").attr("href", faviconUrl);
-    } else {
-      $("head").append(
-        `<link rel="icon" href="${faviconUrl}" type="image/png">`
-      );
-    }
+    $("link[rel='icon'], link[rel='shortcut icon']").remove();
+    $("head").prepend(`
+  <link rel="icon" href="${faviconUrl}" type="image/png" sizes="32x32">
+`);
 
     $("link[href], script[src], a[href], form[action]").each((i, el) => {
       const attr =
